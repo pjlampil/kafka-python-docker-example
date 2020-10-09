@@ -25,3 +25,7 @@ curl --request POST \
   --header 'content-type: application/x-www-form-urlencoded' \
   --data 'value=this is a test message'
 ```
+
+## TODO
+
+- Currently `Persister` is just a python script. We should introduce the Django framework here to make it more real world example.
