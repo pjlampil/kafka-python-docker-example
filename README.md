@@ -26,6 +26,14 @@ curl --request POST \
   --data 'value=this is a test message'
 ```
 
+You can use the logs to verify that message went through the pipeline:
+
+```
+endpoint_1   | 172.25.0.1 - - [09/Oct/2020 08:04:36] "POST / HTTP/1.1" 200 -
+parser_1     | raw-data: this is a test message
+persister_1  | parsed-data: this is a test message
+```
+
 ## TODO
 
 - Currently `Persister` is just a python script. We should introduce the Django framework here to make it more real world example.
