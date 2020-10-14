@@ -41,24 +41,6 @@ services:
       - ./parser:/app
     env_file:
       - ./.env
-  # persister:
-  #   build:
-  #     context: ./persister
-  #   restart: always
-  #   depends_on:
-  #     - kafka
-  #     - zookeeper
-  #     - parser
-  #   volumes:
-  #     - ./persister:/app
-  #   env_file:
-  #     - ./.env
-  db:
-    image: postgres
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
   api:
     build:
       context: ./persister
@@ -67,8 +49,6 @@ services:
       - ./persister/:/app/
     ports:
       - "8001:8000"
-    depends_on:
-      - db
     env_file:
       - ./.env
   persister:
@@ -77,9 +57,13 @@ services:
     command: python manage.py consume
     volumes:
       - ./persister/:/app/
-    depends_on:
-      - db
       - kafka
       - zookeeper
     env_file:
       - ./.env
+  # db:
+  #   image: postgres
+  #   environment:
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
