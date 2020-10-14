@@ -67,3 +67,8 @@ services:
   #     - POSTGRES_DB=postgres
   #     - POSTGRES_USER=postgres
   #     - POSTGRES_PASSWORD=postgres
+  chart:
+    build:
+      context: ./chart
+    ports:
+      - 8002:80
