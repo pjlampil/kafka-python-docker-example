@@ -15,25 +15,16 @@ $ cd kafka-python-docker-example
 $ docker-compose up
 ```
 
+### Run migrations
+```
+$ docker-compose exec api ./manage.py migrate
+```
+
 ## Usage
-
-You can send messages to the `endpoint` by sending a HTTP POST with a parameter `value` set. Example:
-
+Following command will send a message (with somewhat random value) every two seconds until quit. It sends a HTTP POST to the endpoint to simulate the real world scenario.
 ```
-curl --request POST \
-  --url http://localhost:8000/ \
-  --header 'content-type: application/x-www-form-urlencoded' \
-  --data 'value=this is a test message'
+$ docker-compose exec persister ./manage.py send_messages 2
 ```
 
-You can use the logs to verify that message went through the pipeline:
-
-```
-endpoint_1   | 172.25.0.1 - - [09/Oct/2020 08:04:36] "POST / HTTP/1.1" 200 -
-parser_1     | raw-data: this is a test message
-persister_1  | parsed-data: this is a test message
-```
-
-## TODO
-
-- Currently `Persister` is just a python script. We should introduce the Django framework here to make it more real world example.
+## API
+API can be found by default from http://localhost:8001/observations
