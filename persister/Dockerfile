@@ -1,8 +1,10 @@
-FROM python:3.7
-
+FROM python:3
+ENV PYTHONUNBUFFERED=1
 WORKDIR /app
-COPY . /app
-RUN pip --no-cache-dir install -r requirements.txt
+COPY requirements.txt /app/
+RUN pip install -r requirements.txt
+COPY . /app/
+
 RUN mkdir /entrypoint
 
 COPY wait_for_kafka.sh /entrypoint/wait_for_kafka.sh

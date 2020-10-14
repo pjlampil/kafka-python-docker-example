@@ -10,7 +10,7 @@ RAW_DATA_TOPIC_NAME = os.environ.get("RAW_DATA_TOPIC_NAME")
 
 @app.route("/", methods=["POST"])
 def hello_world():
-    value = request.form.get("value").encode()
+    value = request.json.encode()
     producer.send(RAW_DATA_TOPIC_NAME, value)
     return "OK"
 
