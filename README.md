@@ -28,3 +28,6 @@ $ docker-compose exec persister ./manage.py send_messages 2
 
 ## API
 API can be found by default from http://localhost:8001/observations
+
+## Example Frontend
+An example frontend that uses API and visualizes the data can be found by default from http://localhost:8002/
