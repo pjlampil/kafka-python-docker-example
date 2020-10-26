@@ -59,10 +59,21 @@ services:
     command: python manage.py consume
     volumes:
       - ./persister/:/app/
+    depends_on:
       - kafka
       - zookeeper
+      - db
   chart:
     build:
       context: ./chart
     ports:
       - 8002:80
+  db:
+    <<: *base
+    image: binakot/postgresql-postgis-timescaledb
+    ports:
+      - "5432"
+    volumes:
+      - db-data:/pgdata
+volumes:
+  db-data:

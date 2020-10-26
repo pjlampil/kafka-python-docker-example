@@ -8,13 +8,11 @@ from kafka import KafkaConsumer
 
 
 class Command(BaseCommand):
-    help = "Closes the specified poll for voting"
 
     def handle(self, *args, **options):
-
-        consumer = KafkaConsumer(
-            os.environ.get("PARSED_DATA_TOPIC_NAME"), bootstrap_servers="kafka:9092"
-        )
+        parsed_data_topic = os.environ.get("PARSED_DATA_TOPIC_NAME")
+        consumer = KafkaConsumer(parsed_data_topic, bootstrap_servers="kafka:9092")
+        print(f"Listening to topic {parsed_data_topic}")
         for msg in consumer:
             print(f"{msg.topic}: {msg.value.decode()}")
             serializer = ObservationSerializer(

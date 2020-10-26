@@ -8,7 +8,6 @@ import requests
 
 
 class Command(BaseCommand):
-    help = "Closes the specified poll for voting"
 
     def add_arguments(self, parser):
         parser.add_argument("sleep", type=int)
